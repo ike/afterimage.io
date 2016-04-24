@@ -3,12 +3,12 @@ Afterimage website
 
 ## Dev Server
 ```bash
-harp server
+harp server public
 ```
 
 
 ## Publishing
 ```bash
-harp compile
-surge www
+harp compile public
+surge public/www
 ```
