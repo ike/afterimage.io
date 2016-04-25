@@ -45,6 +45,10 @@ li {
   list-style-type: none;
   padding: 0px 10px;
 }
+.header .nav a {
+  text-decoration: none;
+  color: inherit;
+}
 .header .nav li:hover {
   background-color: #4C737B;
   color: #fff;
