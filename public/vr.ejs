@@ -1,0 +1,32 @@
+<body style="background:transparent">
+  <!--<img class="vr-cover-img" id="cover-img" src="/images/vr-bg.png">-->
+  <div class="vr-container" id="vr-container">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.2.0/aframe.min.js"></script>
+  <a-scene vr-mode-ui="enabled: false">
+    <a-assets timeout="10000">
+      <img id="sky" src="/images/vr-full.jpg">
+    </a-assets>
+    <a-sky material="src: #sky" rotation="0 -130 0"></a-sky>
+    <a-entity position="100 100 100">
+      <a-entity camera rotation="0 90 90" look-controls></a-entity>
+      <a-animation attribute="rotation"
+             dur="300000"
+             fill="forwards"
+             easing="linear"
+             to="0 360 0"
+             repeat="indefinite"></a-animation>
+    </a-entity>
+  </a-scene>
+  </div>
+  <script>
+    var scene = document.querySelector('a-assets');
+    if (scene.hasLoaded) {
+      showVR();
+    } else {
+      scene.addEventListener('loaded', showVR);
+    }
+    function showVR() {
+      document.getElementById('vr-container').style.display = 'block';
+    }
+  </script>
+</body>

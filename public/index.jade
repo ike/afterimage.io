@@ -1,30 +1,72 @@
-#container
-  .header
+body
+  .page
+    .header
+      .logo
+        .img-container
+          .blur
+          img(src="images/ai-full.png")
+      .nav
+        .login
+          a(href="/management") Log In
+          a.button.button-outlined(href="/management/register") Sign Up
+      iframe#header-vr(src="/vr.html", allowTransparency="true")
 
-    .logo
-      img(src='images/ai-full.png')
+    .container
+      p 
+      .grid-flex-container
+        .grid-flex-cell
+          h2 Afterimage is the easiest way to make custom interactive displays for kiosks and signage.
 
-    .nav
-      ul(class='menu')
-        li Uses
-        li Pricing
-        li Signup
-        li 
-          a(href="mailto:hi@afterimage.io") Contact
-  .banner
-    img(src='images/tvmockupad.png')
-    .signup
-      p Afterimage is beautifully simple application that allows you to control the content on <span class='underline'>every digital display</span> your business needs. Whether you are a restaurant in need of patron advertisements or a lab who wants to display custom analytics, Afterimage gives you the seamless access to use your screens to their full potential. See our <span class='underline'>list of integrations.</span>
-      a.btn(href="https://docs.google.com/forms/d/1EkyWdCSul5rfd-B3CNlIp1leDFFYI4w4seTUgLmnPn8/viewform") Signup
-  .uses
-    .uses-left
-      .usecase
-        .icon
-        .blocktext
-      .usecase
-        .icon
-        .blocktext
-      .usecase
-        .icon
-        .blocktext
-    .uses-right
+      .grid-flex-container
+        .grid-flex-cell
+          img.icon(src="images/content.svg")
+          h3 Rich Content
+          p Bring the content you already have to all your screens.
+        .grid-flex-cell
+          img.icon(src="images/computer.svg")
+          h3 Extensible
+          p Leverage our platform to the limits of your imagination.
+        .grid-flex-cell
+          img.icon(src="images/videocamera.svg")
+          h3 Partnerships
+          p Work with us to create dynamic content and display experiences.
+
+      hr
+      
+      .grid-flex-container
+        .grid-flex-cell
+          h2 Web-based Management
+          p Manage your screens from any device, anytime.
+          img(src="images/laptop.png")
+
+      hr
+
+      .grid-flex-container
+        .grid-flex-cell
+          h2 Works on any HDMI port
+          p Afterimage proudly offers Chrome hardware.
+
+      .grid-flex-container
+        .grid-flex-cell
+          img.hardware(src="images/chromebit.jpg")
+          h2 Chromebit
+        .grid-flex-cell
+          img.hardware(src="images/chromebox.jpg")
+          h2 Chromebox
+        .grid-flex-cell
+          img.hardware(src="images/chromebase.jpg")
+          h2 Chromebase
+
+      hr
+
+      .grid-flex-container
+        .grid-flex-cell
+          h2 Sign Up
+          p Sign up for an Afterimage account, and we'll give you a call to get things started.
+          a.button(href="/management/register") Start Here!
+          p
+
+    .footer
+      p.center © Afterimage, LLC. <br>
+        | 710 George Washington Way, <br>
+        | Richland, WA. 99352
