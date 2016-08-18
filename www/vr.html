@@ -1,4 +1,5 @@
-<body style="background:transparent">
+<!DOCTYPE html><html><head><link rel="stylesheet" href="css/main.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/min/1.5/min.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Afterimage | Digital Displays and Kiosks</title></head><body><body style="background:transparent">
   <div class="vr-container" id="vr-container">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.2.0/aframe.min.js"></script>
     <a-scene vr-mode-ui="enabled: false">
@@ -8,12 +9,7 @@
       <a-sky material="src: #sky" rotation="0 -45 0"></a-sky>
       <a-entity position="100 100 100">
         <a-entity camera="" wasd-controls="" no-click-look-controls="maxyaw:0.8;maxpitch:1" fov="80" rotation="0 90 0"></a-entity>
-        <a-animation attribute="rotation"
-               dur="300000"
-               fill="forwards"
-               easing="linear"
-               to="0 360 0"
-               repeat="indefinite"></a-animation>
+        <a-animation attribute="rotation" dur="300000" fill="forwards" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
       </a-entity>
     </a-scene>
   </div>
@@ -28,4 +24,4 @@
       document.getElementById('vr-container').style.display = 'block';
     }
   </script>
-</body>
+</body></body></html>

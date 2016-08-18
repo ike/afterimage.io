@@ -7,15 +7,15 @@ body
           img(src="images/ai-full.png")
       .nav
         .login
-          a(href="/management") Log In
-          a.button.button-outlined(href="/management/register") Sign Up
+          a(href="https://afterimage-staging.herokuapp.com/management/") Log In
+          a.button.button-outlined(href="https://afterimage-staging.herokuapp.com/management/sign-up") Sign Up
       iframe#header-vr(src="/vr.html", allowTransparency="true")
 
     .container
       p 
       .grid-flex-container
         .grid-flex-cell
-          h2 Afterimage is the easiest way to make custom interactive displays for kiosks and signage.
+          h2 Afterimage is the easiest way to display your content on any screen.
 
       .grid-flex-container
         .grid-flex-cell
@@ -43,7 +43,50 @@ body
 
       .grid-flex-container
         .grid-flex-cell
-          h2 Works on any HDMI port
+          h2 Bring Your Own Content
+      .grid-flex-container
+        .grid-flex-cell
+          a(href="http://youtube.com")
+            img.integration(src="images/logos/youtube.png")
+        .grid-flex-cell
+          a(href="http://drive.google.com")
+            img.integration(src="images/logos/g-drive.png")
+        .grid-flex-cell
+          a(href="http://slides.google.com")
+            img.integration(src="images/logos/g-slides.png")
+        .grid-flex-cell
+          a(href="http://slides.com")
+            img.integration(src="images/logos/slides.png")
+        .grid-flex-cell
+          a(href="http://vimeo.com")
+            img.integration(src="images/logos/vimeo.png")
+        .grid-flex-cell
+          a(href="http://twitter.com")
+            img.integration(src="images/logos/twitter.png")
+        .grid-flex-cell
+          a(href="http://vine.com")  
+            img.integration(src="images/logos/vine.png")
+        .grid-flex-cell
+          a(href="http://prezi.com")
+            img.integration(src="images/logos/prezi.png")
+      .grid-flex-container
+        .grid-flex-cell
+          p Add content from our growing list of integrations, or write your own custom integration to have full control.
+
+      hr
+      br
+
+      .grid-flex-container
+        .grid-flex-cell
+          h2 Manage Screens Once, Display Everywhere
+          img(src="images/ai_channel_distribution.png")
+
+      hr
+      br
+
+      .grid-flex-container
+        .grid-flex-cell
+          h2 Works on any HDMI-enabled display
           p Afterimage proudly offers Chrome hardware.
 
       .grid-flex-container
@@ -63,7 +106,7 @@ body
         .grid-flex-cell
           h2 Sign Up
           p Sign up for an Afterimage account, and we'll give you a call to get things started.
-          a.button(href="/management/register") Start Here!
+          a.button(href="https://afterimage-staging.herokuapp.com/management/sign-up") Start Here!
           p
 
     .footer
