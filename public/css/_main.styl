@@ -1,4 +1,6 @@
 @import 'yeticss'
+@import 'font-awesome/_font-awesome'
+$fa-font-path: "//netdna.bootstrapcdn.com/font-awesome/4.6.3/fonts"
 
 .header
   height 275px
@@ -7,10 +9,25 @@
   background-image url('/images/vr-bg.png')
   background-size cover
 
+html.cssfilters > body > .page > .header > .logo > .img-container > .blur
+  position absolute
+  background-color #F3F4FF
+  -webkit-filter blur(75px)
+  -moz-filter blur(75px)
+  -ms-filter blur(75px)
+  -o-filter blur(75px)
+  filter url("data:image/svg+xml;utf8,<svg height='0' xmlns='http://www.w3.org/2000/svg'><filter id='svgBlur' x='-5%' y='-5%' width='110%' height='110%'><feGaussianBlur in='SourceGraphic' stdDeviation='5'/></filter></svg>#svgBlur")
+  @css filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius = '75');
+  filter blur(75px)
+  width 100%
+  height 100%
+  top 0
+  left 0
+
 .logo
   position absolute
-  z-index 200
   width 100%
+  z-index 200
   padding 70px
   .img-container
     position relative
@@ -18,23 +35,14 @@
     width 420px
     margin 0 auto
     height 90px
-  .blur
-    position absolute
-    background-color #F3F4FF
-    filter blur(75px)
-    -webkit-filter blur(75px)
-    width 100%
-    height 100%
-    top 0
-    left 0
   img
     position absolute
     width 420px
     top 0
     left 0
 
+
 .nav
-  display inline-block
   position absolute
   z-index 300
   width 100%
@@ -63,6 +71,9 @@
   left 0
   height 275px
 
+.tagline
+  font-size 32px
+
 .icon
   width 75px
 
@@ -73,6 +84,26 @@
   min-width 50px
   max-width 65px
 
+.pricing
+  tbody tr:nth-child(2n-1)
+    background inherit
+
+.pricing.mobile-width
+  display none
+
+.pricing td, .pricing th
+  text-align center
+
+#pricing-select > input 
+    margin-right 5px
+    margin-left 25px
+
+#pricing-select
+    padding-bottom 20px
+
+.bordered-row > td
+  border 1px solid #e6eaed !important
+
 .center
   text-align center
 
@@ -80,6 +111,35 @@
   background-color black
   color white
   padding 20px
+  padding-top 45px
+  font-size 1.1em
+
+  .contact-links
+    left 30px
+    position relative
+
+    span.link
+      margin 15px
+      &:after
+        content "||"
+        margin-left 30px
+        color white
+      &:first-child:before
+        content "     "
+      &:last-child:after
+        content ""
+    a
+      margin 0
+
+  a 
+    margin 23px
+
+.container-documentation
+  text-align left
+
+@media screen and (max-width: 875px)
+  .integrations .grid-flex-cell
+    flex 25%
 
 @media screen and (max-width: 575px)
   .logo
@@ -90,3 +150,35 @@
       width 100%
       padding-top 40px
 
+  .pricing.full-width
+    display none
+  .pricing.mobile-width
+    display table
+
+  .footer
+    .contact-links
+      left 0
+      span.link
+        &:after
+          content " "
+        &:first-child:before
+          content " "
+        &:last-child:after
+          content " "
+        display block
+        width 100%
+
+
+
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('//use.fontawesome.com/releases/v4.6.3/fonts/fontawesome-webfont.eot');
+  src: url('//use.fontawesome.com/releases/v4.6.3/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+       url('//use.fontawesome.com/releases/v4.6.3/fonts/fontawesome-webfont.woff2') format('woff2'),
+       url('//use.fontawesome.com/releases/v4.6.3/fonts/fontawesome-webfont.woff') format('woff'),
+       url('//use.fontawesome.com/releases/v4.6.3/fonts/fontawesome-webfont.ttf') format('truetype'),
+       url('//use.fontawesome.com/releases/v4.6.3/fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

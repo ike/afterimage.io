@@ -2,20 +2,21 @@ body
   .page
     .header
       .logo
-        .img-container
+        .img-container.homepage
           .blur
           img(src="images/ai-full.png")
       .nav
         .login
-          a(href="https://afterimage-staging.herokuapp.com/management/") Log In
-          a.button.button-outlined(href="https://afterimage-staging.herokuapp.com/management/sign-up") Sign Up
+          a(href="/pricing") Pricing
+          a(href="https://app.afterimage.io/") Log In
+          a.button.button-outlined(href="https://app.afterimage.io/sign-up") Sign Up
       iframe#header-vr(src="/vr.html", allowTransparency="true")
 
     .container
       p 
       .grid-flex-container
         .grid-flex-cell
-          h2 Afterimage is the easiest way to display your content on any screen.
+          h1.tagline The easiest Digital Signage Software for custom, interactive displays and kiosks.
 
       .grid-flex-container
         .grid-flex-cell
@@ -44,7 +45,7 @@ body
       .grid-flex-container
         .grid-flex-cell
           h2 Bring Your Own Content
-      .grid-flex-container
+      .grid-flex-container.integrations
         .grid-flex-cell
           a(href="http://youtube.com")
             img.integration(src="images/logos/youtube.png")
@@ -64,7 +65,7 @@ body
           a(href="http://twitter.com")
             img.integration(src="images/logos/twitter.png")
         .grid-flex-cell
-          a(href="http://vine.com")  
+          a(href="http://vine.co")  
             img.integration(src="images/logos/vine.png")
         .grid-flex-cell
           a(href="http://prezi.com")
@@ -89,7 +90,7 @@ body
           h2 Works on any HDMI-enabled display
           p Afterimage proudly offers Chrome hardware.
 
-      .grid-flex-container
+      .grid-flex-container.chrome
         .grid-flex-cell
           img.hardware(src="images/chromebit.jpg")
           h2 Chromebit
@@ -106,10 +107,26 @@ body
         .grid-flex-cell
           h2 Sign Up
           p Sign up for an Afterimage account, and we'll give you a call to get things started.
-          a.button(href="https://afterimage-staging.herokuapp.com/management/sign-up") Start Here!
+          a.button(href="https://app.afterimage.io/sign-up") Create my Account
           p
 
     .footer
+      p.center.contact-links
+        span.link
+          a(href="tel:+1 541 705 5427") +1 541 705 5427
+        span.link
+          a(href="/sdk") SDK
+        span.link
+          a(href="mailto:admin@afterimage.io") admin@afterimage.io
+
       p.center © Afterimage, LLC. <br>
         | 710 George Washington Way, <br>
         | Richland, WA. 99352
+
+      p.center
+        a(href="https://twitter.com/afterimage_io")
+          i(class="fa fa-twitter" aria-hidden="true")
+        a(href="https://facebook.com/afterimage.io") 
+          i(class="fa fa-facebook" aria-hidden="true")
+        a(href="https://instagram.com/afterimage_io") 
+          i(class="fa fa-instagram" aria-hidden="true")

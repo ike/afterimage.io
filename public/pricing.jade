@@ -1,0 +1,172 @@
+body
+  .page
+    .header
+      .logo
+        .img-container
+          .blur
+          img(src="images/ai-full.png")
+      .nav
+        .login
+          a(href="/pricing") Pricing
+          a(href="https://app.afterimage.io/") Log In
+          a.button.button-outlined(href="https://app.afterimage.io/sign-up") Sign Up
+
+    .container
+      p 
+      .grid-flex-container
+        .grid-flex-cell
+          h1.tagline Afterimage Pricing
+
+      .grid-flex-container
+        .grid-flex-cell
+          p Chrome hardware is available for purchase at $135 per device. 20% discount on yearly subscription.
+
+          table.table-outlined.pricing.full-width
+            thead
+              tr
+                th Micro
+                th Basic
+                th Business
+                th Pro
+            tbody
+              tr.bordered-row
+                td 2 Displays
+                td 5 Displays
+                td 9 Displays
+                td 15+ Displays
+              tr.bordered-row
+                td Unlimited Modules
+                td Unlimited Modules
+                td Unlimited Modules
+                td Unlimited Modules
+              tr.bordered-row
+                td Unlimited Users
+                td Unlimited Users
+                td Unlimited Users
+                td Unlimited Users
+              tr.bordered-row
+                td Email Support
+                td Email Support
+                td Live Support
+                td Live Support
+              tr.bordered-row
+                td 
+                td 
+                td 
+                td Private Modules
+              tr.annual-pricing
+                td 
+                  b $88/mo
+                td 
+                  b $160/mo
+                td 
+                  b $237/mo
+                td 
+                  b Call us
+              tr.monthly-pricing
+                td 
+                  b $110/mo
+                td 
+                  b $200/mo
+                td 
+                  b $297/mo
+                td 
+                  b Call us
+
+          table.table-outlined.pricing.mobile-width
+            thead
+              tr
+                th
+                th Displays
+                th Support
+                th Price
+            tbody
+              tr.bordered-row
+                td Micro
+                td 2
+                td Email
+                td.annual-pricing $88/mo
+                td.monthly-pricing $110/mo
+              tr.bordered-row
+                td Basic
+                td 5
+                td Email
+                td.annual-pricing $160/mo
+                td.monthly-pricing $200/mo
+              tr.bordered-row
+                td Business
+                td 9
+                td Live
+                td.annual-pricing $237/mo
+                td.monthly-pricing $297/mo
+              tr.bordered-row
+                td Pro
+                td 15+
+                td Live
+                td Call us.
+
+          form#pricing-select
+            input(type="radio", name="pricing", id="annual", checked)
+            | Annual Pricing
+            input(type="radio", name="pricing", id="monthly")
+            | Monthly Pricing
+
+      .grid-flex-container
+        .grid-flex-cell
+          h2 Sign Up
+          p Sign up for an Afterimage account, and we'll give you a call to get things started.
+          a.button(href="https://app.afterimage.io/sign-up") Create my Account
+          p
+
+    .footer
+      p.center.contact-links
+        span.link
+          a(href="tel:+1 541 705 5427") +1 541 705 5427
+        span.link
+          a(href="/sdk") SDK
+        span.link
+          a(href="mailto:admin@afterimage.io") admin@afterimage.io
+
+      p.center © Afterimage, LLC. <br>
+        | 710 George Washington Way, <br>
+        | Richland, WA. 99352
+
+      p.center
+        a(href="https://twitter.com/afterimage_io")
+          i(class="fa fa-twitter" aria-hidden="true")
+        a(href="https://facebook.com/afterimage.io") 
+          i(class="fa fa-facebook" aria-hidden="true")
+        a(href="https://instagram.com/afterimage_io") 
+          i(class="fa fa-instagram" aria-hidden="true")
+  script.
+    function check() {
+      var isAnnual = document.getElementById("annual").checked
+      if (isAnnual) {
+        var i,
+            m = document.getElementsByClassName("monthly-pricing");
+        for (i = 0; i < m.length; ++i) {
+          m[i].style.display = "none"
+        }
+        var j,
+            a = document.getElementsByClassName("annual-pricing");
+        for (j = 0; j < a.length; ++j) {
+          a[j].style.display = ""
+        }
+      } else {
+        var i,
+            m = document.getElementsByClassName("monthly-pricing");
+        for (i = 0; i < m.length; ++i) {
+          m[i].style.display = ""
+        }
+        var j,
+            a = document.getElementsByClassName("annual-pricing");
+        for (j = 0; j < a.length; ++j) {
+          a[j].style.display = "none"
+        }
+      }
+    }
+    document.getElementById("pricing-select").addEventListener("click", function(e) {
+      check()
+    });
+    check()
+

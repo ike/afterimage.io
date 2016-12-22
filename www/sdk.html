@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://use.fontawesome.com/80c7677837.js"></script>
+    <link rel="stylesheet" href="css/main.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/min/1.5/min.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Afterimage | Digital Displays and Kiosks</title>
+  </head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="logo">
+        <div class="img-container">
+          <div class="blur"></div><img src="images/ai-full.png"/>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="login">
+          <a href="/pricing">Pricing</a>
+          <a href="https://app.afterimage.io/">Log In</a>
+          <a href="https://app.afterimage.io/sign-up" class="button button-outlined">Sign Up</a>
+        </div>
+      </div>
+      <iframe id="header-vr" src="/vr.html" allowTransparency="true"></iframe>
+    </div>
+    <div class="container container-documentation">
+      <h2>Afterimage SDK Documentation</h2>
+      <h4>The Afterimage workflow:</h4>
+      <p>As a user, you have the ability to create channels and add modules to
+      them. When a channel is active on a screen, it will sequentially execute through its modules, displaying each in turn.</p>
+      
+      <p>To create a module, the user adds variables to the module on the server as defined by the module developer. These variables (e.g. src, duration, text, etc.) are then passed to the client as metadata inside the modules. The client then loads the individual modules and presents the metadata to them. The modules then act upon the meta however they want.</p>
+      <p>As a creator, you first need to decide what variables you want available and add them to the server. Currently there is no streamlined way to do this, and they need to be added manually through the server code.</p>
+      
+      <p>As far as module code itself goes, there are four AfterImage module functions available for use. They include <strong><a href="#load">AfterImage.load</a></strong>, <strong><a href="#start">AfterImage.start</a></strong>, <strong><a href="#stop">Afterimage.stop</a></strong>,
+      and <strong><a href="#destroy">AfterImage.destroy</a></strong>.</p>
+      <hr />
+      <h4>AfterImage.load</h4>
+      <p>The AfterImage load function should include a single argument. This will
+      automatically be passed in as the meta object from the server. It can then be
+      used to set module variables. The load function is called as soon as a channel
+      starts.</p>
+      <p>Example:</p>
+      <pre><code>
+
+      var src;
+      AfterImage.load = function(meta) {
+          if (meta.hasOwnProperty('src')) {
+              src = meta.src;
+              // src can now be used inside the start function
+          }
+      }
+      </code></pre>
+      <p>The examples in this documentation will all be written with ES5, but
+      AfterImage modules also work fine with ES2015 notation if that is a preference.</p>
+      <hr />
+      <h4>AfterImage.start</h4>
+      <p>The AfterImage start function is called when a module is shown. It doesn't take
+      any arguments, but can easily use global variables assigned from the load
+      function.
+      Following along the same vein as the example for the load function, here is an
+      example for the start function:</p>
+      <pre><code>
+
+      AfterImage.start = function() {
+          // There are many ways we can use the src var from the load.
+          // If we assume the src is an img url,
+          // we can simply assign it to the background.
+          document.body.style.backgroundImage = 'url(&quot;' + src + '&quot;)';
+      }
+      </code></pre>
+      <hr />
+      <h4>AfterImage.stop</h4>
+      <p>The AfterImage stop function is called when a module is hidden and the next
+      module is shown.</p>
+      <pre><code>
+
+      AfterImage.stop = function() {
+          document.body.style.backgroundImage = 'none';
+      }
+      </code></pre>
+      <p>Technically, we could just leave the image for the next time around. This
+      function is probably more useful in instances where audio or video is in action.
+      It could also be useful when a slideshow is being played and you don't want a
+      flash of the previous image when changing to the new image in the start function.
+      In fact, you could possibly change to the next image inside the stop function,
+      though there are no guarantees it won't be displayed before the module itself is hidden.</p>
+      <hr />
+      <h4>AfterImage.destroy</h4>
+      <p>The AfterImage destroy function is only called whenever server updates are being
+      taken into account, e.g., the channel is changing or has been edited.</p>
+      <pre><code>
+
+      ...
+      // Load image
+      var image = new Image();
+      image.src = '...';
+      ...
+      AfterImage.destroy = function() {
+          image = null;
+      }
+      </code></pre>
+      <p>In most cases, this function probably won't be completely necessary. A case when
+      it could be useful is when you are loading a slideshow containing hundreds of
+      photos and want to clean up the image data before changing channels.</p>
+      <hr />
+      <h3><strong>Example Modules</strong></h3>
+      <h4>URL Example:</h4>
+      <p>If you want to load a webpage or url of some sort, make sure you load it in an
+      iframe as opposed to navigating away from the page. Navigating to a different
+      url will make it so your module no longer has the SDK and can't receive commands
+      from the client.</p>
+      <p>Given that we have the following meta from the server:</p>
+      <pre><code>
+
+      {
+          url: 'http://gitter.im/FreeCodeCamp/FreeCodeCamp'
+      }
+      </code></pre>
+      <p>We can use the following code to display this gitter chat room url as an embed:</p>
+      <pre><code>
+
+      // Variables
+      var url;
+
+      // Body styles
+      document.body.style = 'margin:0;overflow:hidden'
+
+      // Elements
+      var iframe = document.createElement('iframe');
+      iframe.frameBorder = 0;
+      // Set the iframe height &gt; 100%
+      // To hide the join chat room btn
+      iframe.style = 'display:none;height:calc(100% + 67px);width:100%';
+
+      // Module functions
+      AfterImage.load = function(meta) {
+          if (meta.hasOwnProperty('url')) {
+          // Gitter has an embed option
+              url = meta.url + '/~embed';
+          }
+          iframe.src = url;
+          document.body.appendChild(iframe);
+      }
+
+      AfterImage.start = function() {
+          iframe.style.display = 'block';
+      }
+
+      AfterImage.stop = function() {
+          iframe.style.display = 'none';
+      }
+      </code></pre>
+      <p>Since this is a custom module, as both the user and programmer we'll know that the
+      input should end without a  backslash, but if we wanted to let others use this
+      module, we would add some sort of parsing for the url.</p>
+      <h4>Basic Example:</h4>
+      <pre><code>
+
+      // Global variables
+      var src;
+      // AfterImage module functions
+      AfterImage.load = function(meta) {
+          if (meta.hasOwnProperty('src')) {
+              src = meta.src;
+          }
+      }
+      AfterImage.start = function() {
+          document.body.style.backgroundImage = 'url(&quot;' + src + '&quot;)';
+      }
+      AfterImage.stop = function() {
+          document.body.style.backgroundImage = 'none';
+      }
+      </code></pre>
+      <h4>Example Slideshow Module:</h4>
+      <pre><code>
+      // Global variables
+      var images, duration = 7000, timeout, index = 0;
+
+      // Set body styles
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
+
+      // AfterImage module functions
+      AfterImage.load = function(meta) {
+          if (meta.hasOwnProperty('images')) {
+              images = meta.images.slice();
+          }
+          if (meta.hasOwnProperty('duration')) {
+              duration = meta.duration;
+          }
+          // Load first image
+          loadImage(images[index]);
+      }
+      AfterImage.start = function() {
+          active = true;
+          index = 0;
+          slideshow();
+      }
+      AfterImage.stop = function() {
+          active = false;
+          clearTimeout(timeout);
+      }
+
+      function loadImage(url) {
+          var image = new Image();
+          image.src = url;
+      }
+
+      function slideshow() {
+          if (active) {
+              // Set image
+              document.body.style.backgroundImage = 'url(&quot;' + images[index] + '&quot;)';
+              // Increment index
+              if (index &gt;= images.length - 1) {
+                  index = 0;
+              } else {
+                  index++;
+              }
+              // Load next image
+              loadImage(images[index]);
+              // Set timeout for next image
+              timeout = setTimeout(slideshow, duration);
+          }
+      }
+      </code></pre>
+      <h4>Example jQuery Module:</h4>
+      <pre><code>
+
+      // Global variables
+      var duration = 10000, active = false, sentences = [], index = 0;
+
+      // Load scripts
+      const tag = document.createElement('script');
+      tag.src = '../jquery.min.js';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // AfterImage module functions
+      AfterImage.load = function(meta) {
+          if (!window.jQuery) {
+              requestAnimationFrame(AfterImage.load);
+          } else {
+              if (meta.hasOwnProperty('duration')) {
+                  duration = meta.duration;
+              }
+              if (meta.hasOwnProperty('sentences')) {
+                  sentences = meta.sentences;
+              }
+              // Set styles
+              $('body').css({
+                  backgroundColor: '#D1D3C4',
+                  color: '#444554',
+                  fontFamily: 'Palatino'
+              })
+              // Add elements
+              $('body')
+              .append($('&lt;h1&gt;', { id: 'container' })
+                  .css({
+                      position: 'absolute',
+                      top: '50%',
+                      transform: 'translateY(-100%)'
+                  })
+              );
+
+
+              if (active) {
+                  animate();
+              }
+          }
+      }
+
+      // Animation function
+      function animate() {
+          if (active) {
+              var text = sentences[index];
+              if (text === '/time') {
+                  // Get time
+                  var date = new Date(),
+                      hours = date.getHours(),
+                      minutes = date.getMinutes(),
+                      pm = false;
+                  // Format timestamp
+                  if (hours &gt; 12) {
+                      pm = true;
+                      hours -= 12;
+                  } else if (hours === 0) {
+                      hours = 12;
+                  }
+                  if (minutes &lt; 10) {
+                      minutes = '0' + minutes;
+                  }
+                  text = hours + ':' + minutes + (pm ? ' PM' : ' AM');
+              }
+              $('#container').text(text);
+              $('#container').css({
+                  left: '',
+                  right: ''
+              });
+              $('#container').animate({
+                  right: '10px'
+              }, duration / 2).animate({
+                  left: '10px'
+              }, duration / 2, function() {
+                  if (index &gt; sentences.length - 2) {
+                      index = 0;
+                  } else {
+                      index++;
+                  }
+                  animate();
+              });
+          }
+      }
+
+      AfterImage.start = function() {
+          active = true;
+          // Make sure jQuery is loaded
+          if (window.jQuery) {
+              animate();
+          }
+      }
+
+      AfterImage.stop = function() {
+          active = false;
+          $('#container').finish();
+          index = 0;
+      }
+      </code></pre>
+    </div>
+  </div>
+  <div class="footer">
+    <p class="center">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="tel:+1 541 705 5427">+1 541 705 5427</a><span>&nbsp;&nbsp;||&nbsp;&nbsp; </span><a href="/sdk">SDK</a><span>&nbsp;&nbsp;||&nbsp;&nbsp; </span><a href="mailto:admin@afterimage.io">admin@afterimage.io</a>
+    </p>
+    <p class="center">
+      © Afterimage, LLC. <br>
+      710 George Washington Way, <br>
+      Richland, WA. 99352
+    </p>
+    <p class="center"><a href="https://twitter.com/afterimage_io"><i aria-hidden="true" class="fa fa-twitter"></i></a>&nbsp;
+      &nbsp;<a href="https://facebook.com/afterimage.io"> <i aria-hidden="true" class="fa fa-facebook"></i></a>&nbsp;
+      &nbsp;<a href="https://instagram.com/afterimage_io"> <i aria-hidden="true" class="fa fa-instagram"></i></a>
+    </p>
+  </div>
+</body>
+</html>

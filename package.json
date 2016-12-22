@@ -1,0 +1,12 @@
+{
+  "name": "afterimage.io",
+  "description": "Afterimage website",
+  "version": "1.0.0",
+  "dependencies": {
+    
+  },
+  "scripts": {
+    "publish": "harp compile && surge www && inliner http://afterimage.io -i > www/index.html && inliner http://afterimage.io/pricing -i > www/pricing.html && surge www",
+    "dev": "cd public/css && stylus -u yeticss _main.styl -o main.css && cd ../.. && harp server"
+  }
+}
